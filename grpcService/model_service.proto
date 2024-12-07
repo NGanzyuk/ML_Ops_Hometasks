@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+service ModelService {
+    rpc GetModelList (Empty) returns (ModelList);
+    rpc TrainModel (TrainRequest) returns (TrainResponse);
+    rpc GetPrediction (PredictionRequest) returns (PredictionResponse);
+    rpc DeleteModel (DeleteRequest) returns (DeleteResponse);
+}
+
+message Empty {}
+
+message ModelList {
+    repeated string types = 1;
+}
+
+message TrainRequest {
+    string model_type = 1;
+    google.protobuf.Struct params = 2;
+}
+
+message TrainResponse {
+    string status = 1;
+}
+
+message PredictionRequest {
+    string model_name = 1;
+    google.protobuf.Struct input_data = 2;
+}
+
+message PredictionResponse {
+    repeated float prediction = 1;
+}
+
+message DeleteRequest {
+    string model_name = 1;
+}
+
+message DeleteResponse {
+    string status = 1;
+}
