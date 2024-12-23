@@ -14,9 +14,20 @@ spec:
     spec:
       containers:
       - name: flask-api
-        image: your-docker-repo/flask-api:latest
+        image: nganzyukedu/ml_ops/flask-api:latest
         ports:
         - containerPort: 5000
+        env:
+        - name: DATABASE_URL
+          value: "postgresql://mydb:mydb@postgres-service:5432/mydb"
+        - name: S3_ENDPOINT_URL
+          value: "http://minio-service:9000"
+        - name: S3_ACCESS_KEY
+          value: "myaccesskey"
+        - name: S3_SECRET_KEY
+          value: "mysecretkey"
+        - name: S3_BUCKET_NAME
+          value: "mybucket"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -34,9 +45,18 @@ spec:
     spec:
       containers:
       - name: streamlit-app
-        image: your-docker-repo/streamlit-app:latest
+        image: nganzyukedu/ml_ops/streamlit-app:latest
         ports:
         - containerPort: 8501
+        env:
+        - name: S3_ENDPOINT_URL
+          value: "http://minio-service:9000"
+        - name: S3_ACCESS_KEY
+          value: "myaccesskey"
+        - name: S3_SECRET_KEY
+          value: "mysecretkey"
+        - name: S3_BUCKET_NAME
+          value: "mybucket"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -54,9 +74,62 @@ spec:
     spec:
       containers:
       - name: grpc-service
-        image: your-docker-repo/grpc-service:latest
+        image: nganzyukedu/grpc-service:latest
         ports:
         - containerPort: 50051
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: "mydb"
+        - name: POSTGRES_PASSWORD
+          value: "mydb"
+        - name: POSTGRES_DB
+          value: "mydb"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minio
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      containers:
+      - name: minio
+        image: minio/minio:latest
+        ports:
+        - containerPort: 9000
+        args: ["server", "/data"]
+        env:
+        - name: MINIO_ACCESS_KEY
+          value: "minioaccesskey"
+        - name: MINIO_SECRET_KEY
+          value: "miniosecretkey"
 ---
 apiVersion: v1
 kind: Service
@@ -94,3 +167,25 @@ spec:
       targetPort: 50051
   selector:
     app: grpc-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app: postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-service
+spec:
+  ports:
+    - port: 9000
+      targetPort: 9000
+  selector:
+    app: minio

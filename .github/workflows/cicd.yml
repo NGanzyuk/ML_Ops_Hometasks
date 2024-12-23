@@ -33,6 +33,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t nganzyukedu/ml_ops:latest  . 
+
       - name: Log in to Docker Hub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
