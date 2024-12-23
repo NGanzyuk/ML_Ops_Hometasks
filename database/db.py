@@ -1,5 +1,6 @@
 import json
 import typing
+
 import psycopg2
 
 INIT_STATEMENT = """CREATE TABLE IF NOT EXISTS models

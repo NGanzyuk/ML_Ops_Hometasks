@@ -104,6 +104,7 @@ modelDeleteInput = api.model(
     },
 )
 
+
 # Определение маршрутов API
 @api.route("/status")
 class Status(Resource):
