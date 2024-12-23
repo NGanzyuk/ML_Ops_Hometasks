@@ -3,10 +3,10 @@ import time
 from concurrent import futures
 
 import grpc
-import pandas as pd
-
 import model_service_pb2
 import model_service_pb2_grpc
+import pandas as pd
+
 from models.model_factory import modelTypes
 
 logging.basicConfig(level=logging.INFO)
@@ -21,7 +21,9 @@ class ModelService(model_service_pb2_grpc.ModelServiceServicer):
         return model_service_pb2.ModelList(types=list(modelTypes.keys()))
 
     def TrainModel(self, request, context):
-        logging.info(f"Обучение модели: {request.model_type} с параметрами: {request.params}")
+        logging.info(
+            f"Обучение модели: {request.model_type} с параметрами: {request.params}"
+        )
 
         model_class = modelTypes.get(request.model_type)
         if model_class is None:
@@ -42,7 +44,9 @@ class ModelService(model_service_pb2_grpc.ModelServiceServicer):
         return model_service_pb2.TrainResponse(status="success")
 
     def GetPrediction(self, request, context):
-        logging.info(f"Получение предсказания для модели: {request.model_name} с данными: {request.input_data}")
+        logging.info(
+            f"Получение предсказания для модели: {request.model_name} с данными: {request.input_data}"
+        )
 
         if request.model_name not in self.models:
             context.set_details(f"Модель '{request.model_name}' не найдена.")
@@ -68,7 +72,7 @@ class ModelService(model_service_pb2_grpc.ModelServiceServicer):
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     model_service_pb2_grpc.add_ModelServiceServicer_to_server(ModelService(), server)
-    server.add_insecure_port('[::]:50051')
+    server.add_insecure_port("[::]:50051")
     server.start()
     logging.info("gRPC сервер запущен на порту 50051.")
     try:
@@ -78,5 +82,5 @@ def serve():
         server.stop(0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     serve()

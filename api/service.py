@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score
 
 from api.s3Service import S3Service
 from database.db import DataBase
-from models.model_factory import modelTypes, getModelType, loadModel
+from models.model_factory import getModelType, loadModel, modelTypes
 
 
 class Service:
@@ -52,14 +52,16 @@ class Service:
 
         return newModelName
 
-    def modelTrain(self, data: pd.DataFrame, target: list, modelType: str, params: dict) -> str:
+    def modelTrain(
+        self, data: pd.DataFrame, target: list, modelType: str, params: dict
+    ) -> str:
         """Обучить модель с заданными параметрами и данными."""
         modelName = str(uuid.uuid4())
         clfClass = getModelType(modelType)
         if data is None:
             dataset = self.load_dataset("data/train.csv")
-            target = dataset['target']
-            data = dataset.drop('target')
+            target = dataset["target"]
+            data = dataset.drop("target")
         if clfClass is None:
             raise ValueError(f"Тип модели '{modelType}' не найден.")
 
@@ -104,7 +106,7 @@ class Service:
     def upload_model_to_s3(self, model_name: str, model_binary: bytes):
         """Загрузка модели в S3."""
         file_name = f"{model_name}.model"
-        with open(file_name, 'wb') as f:
+        with open(file_name, "wb") as f:
             f.write(model_binary)
         self.s3_service.upload_file(file_name)
 
@@ -112,5 +114,5 @@ class Service:
         """Скачивание модели из S3."""
         file_name = f"{model_name}.model"
         self.s3_service.download_file(file_name, file_name)
-        with open(file_name, 'rb') as f:
+        with open(file_name, "rb") as f:
             return f.read()

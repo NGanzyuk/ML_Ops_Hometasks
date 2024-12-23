@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 import tempfile
-import xgboost as xgb
+
 import pandas as pd
+import xgboost as xgb
+
 from .base_model import BaseModel
+
 
 class XGBoostClassifierModel(BaseModel):
 

@@ -7,6 +7,7 @@ from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
+
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -14,95 +15,127 @@ _sym_db = _symbol_database.Default()
 
 from google.protobuf import struct_pb2 as google_dot_protobuf_dot_struct__pb2
 
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b'\n\x1fgrpcService/model_service.proto\x1a\x1cgoogle/protobuf/struct.proto"\x07\n\x05\x45mpty"\x1a\n\tModelList\x12\r\n\x05types\x18\x01 \x03(\t"K\n\x0cTrainRequest\x12\x12\n\nmodel_type\x18\x01 \x01(\t\x12\'\n\x06params\x18\x02 \x01(\x0b\x32\x17.google.protobuf.Struct"\x1f\n\rTrainResponse\x12\x0e\n\x06status\x18\x01 \x01(\t"T\n\x11PredictionRequest\x12\x12\n\nmodel_name\x18\x01 \x01(\t\x12+\n\ninput_data\x18\x02 \x01(\x0b\x32\x17.google.protobuf.Struct"(\n\x12PredictionResponse\x12\x12\n\nprediction\x18\x01 \x03(\x02"#\n\rDeleteRequest\x12\x12\n\nmodel_name\x18\x01 \x01(\t" \n\x0e\x44\x65leteResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2\xc9\x01\n\x0cModelService\x12"\n\x0cGetModelList\x12\x06.Empty\x1a\n.ModelList\x12+\n\nTrainModel\x12\r.TrainRequest\x1a\x0e.TrainResponse\x12\x38\n\rGetPrediction\x12\x12.PredictionRequest\x1a\x13.PredictionResponse\x12.\n\x0b\x44\x65leteModel\x12\x0e.DeleteRequest\x1a\x0f.DeleteResponseb\x06proto3'
+)
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1fgrpcService/model_service.proto\x1a\x1cgoogle/protobuf/struct.proto\"\x07\n\x05\x45mpty\"\x1a\n\tModelList\x12\r\n\x05types\x18\x01 \x03(\t\"K\n\x0cTrainRequest\x12\x12\n\nmodel_type\x18\x01 \x01(\t\x12\'\n\x06params\x18\x02 \x01(\x0b\x32\x17.google.protobuf.Struct\"\x1f\n\rTrainResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\"T\n\x11PredictionRequest\x12\x12\n\nmodel_name\x18\x01 \x01(\t\x12+\n\ninput_data\x18\x02 \x01(\x0b\x32\x17.google.protobuf.Struct\"(\n\x12PredictionResponse\x12\x12\n\nprediction\x18\x01 \x03(\x02\"#\n\rDeleteRequest\x12\x12\n\nmodel_name\x18\x01 \x01(\t\" \n\x0e\x44\x65leteResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2\xc9\x01\n\x0cModelService\x12\"\n\x0cGetModelList\x12\x06.Empty\x1a\n.ModelList\x12+\n\nTrainModel\x12\r.TrainRequest\x1a\x0e.TrainResponse\x12\x38\n\rGetPrediction\x12\x12.PredictionRequest\x1a\x13.PredictionResponse\x12.\n\x0b\x44\x65leteModel\x12\x0e.DeleteRequest\x1a\x0f.DeleteResponseb\x06proto3')
 
-
-
-_EMPTY = DESCRIPTOR.message_types_by_name['Empty']
-_MODELLIST = DESCRIPTOR.message_types_by_name['ModelList']
-_TRAINREQUEST = DESCRIPTOR.message_types_by_name['TrainRequest']
-_TRAINRESPONSE = DESCRIPTOR.message_types_by_name['TrainResponse']
-_PREDICTIONREQUEST = DESCRIPTOR.message_types_by_name['PredictionRequest']
-_PREDICTIONRESPONSE = DESCRIPTOR.message_types_by_name['PredictionResponse']
-_DELETEREQUEST = DESCRIPTOR.message_types_by_name['DeleteRequest']
-_DELETERESPONSE = DESCRIPTOR.message_types_by_name['DeleteResponse']
-Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
-  'DESCRIPTOR' : _EMPTY,
-  '__module__' : 'grpcService.model_service_pb2'
-  # @@protoc_insertion_point(class_scope:Empty)
-  })
+_EMPTY = DESCRIPTOR.message_types_by_name["Empty"]
+_MODELLIST = DESCRIPTOR.message_types_by_name["ModelList"]
+_TRAINREQUEST = DESCRIPTOR.message_types_by_name["TrainRequest"]
+_TRAINRESPONSE = DESCRIPTOR.message_types_by_name["TrainResponse"]
+_PREDICTIONREQUEST = DESCRIPTOR.message_types_by_name["PredictionRequest"]
+_PREDICTIONRESPONSE = DESCRIPTOR.message_types_by_name["PredictionResponse"]
+_DELETEREQUEST = DESCRIPTOR.message_types_by_name["DeleteRequest"]
+_DELETERESPONSE = DESCRIPTOR.message_types_by_name["DeleteResponse"]
+Empty = _reflection.GeneratedProtocolMessageType(
+    "Empty",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _EMPTY,
+        "__module__": "grpcService.model_service_pb2",
+        # @@protoc_insertion_point(class_scope:Empty)
+    },
+)
 _sym_db.RegisterMessage(Empty)
 
-ModelList = _reflection.GeneratedProtocolMessageType('ModelList', (_message.Message,), {
-  'DESCRIPTOR' : _MODELLIST,
-  '__module__' : 'grpcService.model_service_pb2'
-  # @@protoc_insertion_point(class_scope:ModelList)
-  })
+ModelList = _reflection.GeneratedProtocolMessageType(
+    "ModelList",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _MODELLIST,
+        "__module__": "grpcService.model_service_pb2",
+        # @@protoc_insertion_point(class_scope:ModelList)
+    },
+)
 _sym_db.RegisterMessage(ModelList)
 
-TrainRequest = _reflection.GeneratedProtocolMessageType('TrainRequest', (_message.Message,), {
-  'DESCRIPTOR' : _TRAINREQUEST,
-  '__module__' : 'grpcService.model_service_pb2'
-  # @@protoc_insertion_point(class_scope:TrainRequest)
-  })
+TrainRequest = _reflection.GeneratedProtocolMessageType(
+    "TrainRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _TRAINREQUEST,
+        "__module__": "grpcService.model_service_pb2",
+        # @@protoc_insertion_point(class_scope:TrainRequest)
+    },
+)
 _sym_db.RegisterMessage(TrainRequest)
 
-TrainResponse = _reflection.GeneratedProtocolMessageType('TrainResponse', (_message.Message,), {
-  'DESCRIPTOR' : _TRAINRESPONSE,
-  '__module__' : 'grpcService.model_service_pb2'
-  # @@protoc_insertion_point(class_scope:TrainResponse)
-  })
+TrainResponse = _reflection.GeneratedProtocolMessageType(
+    "TrainResponse",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _TRAINRESPONSE,
+        "__module__": "grpcService.model_service_pb2",
+        # @@protoc_insertion_point(class_scope:TrainResponse)
+    },
+)
 _sym_db.RegisterMessage(TrainResponse)
 
-PredictionRequest = _reflection.GeneratedProtocolMessageType('PredictionRequest', (_message.Message,), {
-  'DESCRIPTOR' : _PREDICTIONREQUEST,
-  '__module__' : 'grpcService.model_service_pb2'
-  # @@protoc_insertion_point(class_scope:PredictionRequest)
-  })
+PredictionRequest = _reflection.GeneratedProtocolMessageType(
+    "PredictionRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _PREDICTIONREQUEST,
+        "__module__": "grpcService.model_service_pb2",
+        # @@protoc_insertion_point(class_scope:PredictionRequest)
+    },
+)
 _sym_db.RegisterMessage(PredictionRequest)
 
-PredictionResponse = _reflection.GeneratedProtocolMessageType('PredictionResponse', (_message.Message,), {
-  'DESCRIPTOR' : _PREDICTIONRESPONSE,
-  '__module__' : 'grpcService.model_service_pb2'
-  # @@protoc_insertion_point(class_scope:PredictionResponse)
-  })
+PredictionResponse = _reflection.GeneratedProtocolMessageType(
+    "PredictionResponse",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _PREDICTIONRESPONSE,
+        "__module__": "grpcService.model_service_pb2",
+        # @@protoc_insertion_point(class_scope:PredictionResponse)
+    },
+)
 _sym_db.RegisterMessage(PredictionResponse)
 
-DeleteRequest = _reflection.GeneratedProtocolMessageType('DeleteRequest', (_message.Message,), {
-  'DESCRIPTOR' : _DELETEREQUEST,
-  '__module__' : 'grpcService.model_service_pb2'
-  # @@protoc_insertion_point(class_scope:DeleteRequest)
-  })
+DeleteRequest = _reflection.GeneratedProtocolMessageType(
+    "DeleteRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DELETEREQUEST,
+        "__module__": "grpcService.model_service_pb2",
+        # @@protoc_insertion_point(class_scope:DeleteRequest)
+    },
+)
 _sym_db.RegisterMessage(DeleteRequest)
 
-DeleteResponse = _reflection.GeneratedProtocolMessageType('DeleteResponse', (_message.Message,), {
-  'DESCRIPTOR' : _DELETERESPONSE,
-  '__module__' : 'grpcService.model_service_pb2'
-  # @@protoc_insertion_point(class_scope:DeleteResponse)
-  })
+DeleteResponse = _reflection.GeneratedProtocolMessageType(
+    "DeleteResponse",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DELETERESPONSE,
+        "__module__": "grpcService.model_service_pb2",
+        # @@protoc_insertion_point(class_scope:DeleteResponse)
+    },
+)
 _sym_db.RegisterMessage(DeleteResponse)
 
-_MODELSERVICE = DESCRIPTOR.services_by_name['ModelService']
+_MODELSERVICE = DESCRIPTOR.services_by_name["ModelService"]
 if _descriptor._USE_C_DESCRIPTORS == False:
 
-  DESCRIPTOR._options = None
-  _EMPTY._serialized_start=65
-  _EMPTY._serialized_end=72
-  _MODELLIST._serialized_start=74
-  _MODELLIST._serialized_end=100
-  _TRAINREQUEST._serialized_start=102
-  _TRAINREQUEST._serialized_end=177
-  _TRAINRESPONSE._serialized_start=179
-  _TRAINRESPONSE._serialized_end=210
-  _PREDICTIONREQUEST._serialized_start=212
-  _PREDICTIONREQUEST._serialized_end=296
-  _PREDICTIONRESPONSE._serialized_start=298
-  _PREDICTIONRESPONSE._serialized_end=338
-  _DELETEREQUEST._serialized_start=340
-  _DELETEREQUEST._serialized_end=375
-  _DELETERESPONSE._serialized_start=377
-  _DELETERESPONSE._serialized_end=409
-  _MODELSERVICE._serialized_start=412
-  _MODELSERVICE._serialized_end=613
+    DESCRIPTOR._options = None
+    _EMPTY._serialized_start = 65
+    _EMPTY._serialized_end = 72
+    _MODELLIST._serialized_start = 74
+    _MODELLIST._serialized_end = 100
+    _TRAINREQUEST._serialized_start = 102
+    _TRAINREQUEST._serialized_end = 177
+    _TRAINRESPONSE._serialized_start = 179
+    _TRAINRESPONSE._serialized_end = 210
+    _PREDICTIONREQUEST._serialized_start = 212
+    _PREDICTIONREQUEST._serialized_end = 296
+    _PREDICTIONRESPONSE._serialized_start = 298
+    _PREDICTIONRESPONSE._serialized_end = 338
+    _DELETEREQUEST._serialized_start = 340
+    _DELETEREQUEST._serialized_end = 375
+    _DELETERESPONSE._serialized_start = 377
+    _DELETERESPONSE._serialized_end = 409
+    _MODELSERVICE._serialized_start = 412
+    _MODELSERVICE._serialized_end = 613
 # @@protoc_insertion_point(module_scope)

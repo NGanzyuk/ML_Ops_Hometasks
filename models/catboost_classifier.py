@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 import tempfile
+
 import catboost
 import pandas as pd
+
 from .base_model import BaseModel
+
 
 class CatBoostClassifierModel(BaseModel):
 

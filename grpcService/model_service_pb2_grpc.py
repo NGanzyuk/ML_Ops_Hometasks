@@ -2,7 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from grpcService import model_service_pb2 as grpcService_dot_model__service__pb2
+from grpcService import \
+    model_service_pb2 as grpcService_dot_model__service__pb2
 
 
 class ModelServiceStub(object):
@@ -15,25 +16,25 @@ class ModelServiceStub(object):
             channel: A grpc.Channel.
         """
         self.GetModelList = channel.unary_unary(
-                '/ModelService/GetModelList',
-                request_serializer=grpcService_dot_model__service__pb2.Empty.SerializeToString,
-                response_deserializer=grpcService_dot_model__service__pb2.ModelList.FromString,
-                )
+            "/ModelService/GetModelList",
+            request_serializer=grpcService_dot_model__service__pb2.Empty.SerializeToString,
+            response_deserializer=grpcService_dot_model__service__pb2.ModelList.FromString,
+        )
         self.TrainModel = channel.unary_unary(
-                '/ModelService/TrainModel',
-                request_serializer=grpcService_dot_model__service__pb2.TrainRequest.SerializeToString,
-                response_deserializer=grpcService_dot_model__service__pb2.TrainResponse.FromString,
-                )
+            "/ModelService/TrainModel",
+            request_serializer=grpcService_dot_model__service__pb2.TrainRequest.SerializeToString,
+            response_deserializer=grpcService_dot_model__service__pb2.TrainResponse.FromString,
+        )
         self.GetPrediction = channel.unary_unary(
-                '/ModelService/GetPrediction',
-                request_serializer=grpcService_dot_model__service__pb2.PredictionRequest.SerializeToString,
-                response_deserializer=grpcService_dot_model__service__pb2.PredictionResponse.FromString,
-                )
+            "/ModelService/GetPrediction",
+            request_serializer=grpcService_dot_model__service__pb2.PredictionRequest.SerializeToString,
+            response_deserializer=grpcService_dot_model__service__pb2.PredictionResponse.FromString,
+        )
         self.DeleteModel = channel.unary_unary(
-                '/ModelService/DeleteModel',
-                request_serializer=grpcService_dot_model__service__pb2.DeleteRequest.SerializeToString,
-                response_deserializer=grpcService_dot_model__service__pb2.DeleteResponse.FromString,
-                )
+            "/ModelService/DeleteModel",
+            request_serializer=grpcService_dot_model__service__pb2.DeleteRequest.SerializeToString,
+            response_deserializer=grpcService_dot_model__service__pb2.DeleteResponse.FromString,
+        )
 
 
 class ModelServiceServicer(object):
@@ -42,124 +43,173 @@ class ModelServiceServicer(object):
     def GetModelList(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def TrainModel(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def GetPrediction(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def DeleteModel(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
 
 def add_ModelServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetModelList': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetModelList,
-                    request_deserializer=grpcService_dot_model__service__pb2.Empty.FromString,
-                    response_serializer=grpcService_dot_model__service__pb2.ModelList.SerializeToString,
-            ),
-            'TrainModel': grpc.unary_unary_rpc_method_handler(
-                    servicer.TrainModel,
-                    request_deserializer=grpcService_dot_model__service__pb2.TrainRequest.FromString,
-                    response_serializer=grpcService_dot_model__service__pb2.TrainResponse.SerializeToString,
-            ),
-            'GetPrediction': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetPrediction,
-                    request_deserializer=grpcService_dot_model__service__pb2.PredictionRequest.FromString,
-                    response_serializer=grpcService_dot_model__service__pb2.PredictionResponse.SerializeToString,
-            ),
-            'DeleteModel': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteModel,
-                    request_deserializer=grpcService_dot_model__service__pb2.DeleteRequest.FromString,
-                    response_serializer=grpcService_dot_model__service__pb2.DeleteResponse.SerializeToString,
-            ),
+        "GetModelList": grpc.unary_unary_rpc_method_handler(
+            servicer.GetModelList,
+            request_deserializer=grpcService_dot_model__service__pb2.Empty.FromString,
+            response_serializer=grpcService_dot_model__service__pb2.ModelList.SerializeToString,
+        ),
+        "TrainModel": grpc.unary_unary_rpc_method_handler(
+            servicer.TrainModel,
+            request_deserializer=grpcService_dot_model__service__pb2.TrainRequest.FromString,
+            response_serializer=grpcService_dot_model__service__pb2.TrainResponse.SerializeToString,
+        ),
+        "GetPrediction": grpc.unary_unary_rpc_method_handler(
+            servicer.GetPrediction,
+            request_deserializer=grpcService_dot_model__service__pb2.PredictionRequest.FromString,
+            response_serializer=grpcService_dot_model__service__pb2.PredictionResponse.SerializeToString,
+        ),
+        "DeleteModel": grpc.unary_unary_rpc_method_handler(
+            servicer.DeleteModel,
+            request_deserializer=grpcService_dot_model__service__pb2.DeleteRequest.FromString,
+            response_serializer=grpcService_dot_model__service__pb2.DeleteResponse.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'ModelService', rpc_method_handlers)
+        "ModelService", rpc_method_handlers
+    )
     server.add_generic_rpc_handlers((generic_handler,))
 
 
- # This class is part of an EXPERIMENTAL API.
+# This class is part of an EXPERIMENTAL API.
 class ModelService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def GetModelList(request,
+    def GetModelList(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ModelService/GetModelList',
+            "/ModelService/GetModelList",
             grpcService_dot_model__service__pb2.Empty.SerializeToString,
             grpcService_dot_model__service__pb2.ModelList.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def TrainModel(request,
+    def TrainModel(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ModelService/TrainModel',
+            "/ModelService/TrainModel",
             grpcService_dot_model__service__pb2.TrainRequest.SerializeToString,
             grpcService_dot_model__service__pb2.TrainResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def GetPrediction(request,
+    def GetPrediction(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ModelService/GetPrediction',
+            "/ModelService/GetPrediction",
             grpcService_dot_model__service__pb2.PredictionRequest.SerializeToString,
             grpcService_dot_model__service__pb2.PredictionResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def DeleteModel(request,
+    def DeleteModel(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ModelService/DeleteModel',
+            "/ModelService/DeleteModel",
             grpcService_dot_model__service__pb2.DeleteRequest.SerializeToString,
             grpcService_dot_model__service__pb2.DeleteResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )

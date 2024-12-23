@@ -1,6 +1,7 @@
-import streamlit as st
-import requests
 import logging
+
+import requests
+import streamlit as st
 
 API_URL = "http://localhost:8000"
 
@@ -20,7 +21,9 @@ def get_model_list():
 
 
 def train_model(model_type, params):
-    response = requests.post(f"{API_URL}/model", json={"model_type": model_type, "params": params})
+    response = requests.post(
+        f"{API_URL}/model", json={"model_type": model_type, "params": params}
+    )
     if response.status_code == 200:
         st.success("Модель успешно обучена!")
     else:
@@ -29,7 +32,9 @@ def train_model(model_type, params):
 
 
 def get_prediction(model_name, input_data):
-    response = requests.get(f"{API_URL}/model", params={"model_name": model_name, "input_data": input_data})
+    response = requests.get(
+        f"{API_URL}/model", params={"model_name": model_name, "input_data": input_data}
+    )
     if response.status_code == 200:
         return response.json()
     else:
@@ -43,7 +48,10 @@ st.write("Доступные модели: ", models)
 
 with st.form("train_model"):
     model_type = st.selectbox("Выберите модель", models)
-    params = st.text_area("Введите параметры модели в формате JSON", '{"param1": value1, "param2": value2}')
+    params = st.text_area(
+        "Введите параметры модели в формате JSON",
+        '{"param1": value1, "param2": value2}',
+    )
     submit_button = st.form_submit_button("Обучить модель")
     if submit_button:
         train_model(model_type, params)
@@ -61,7 +69,9 @@ with st.form("delete_model"):
     model_to_delete = st.selectbox("Выберите модель для удаления", models)
     delete_button = st.form_submit_button("Удалить модель")
     if delete_button:
-        response = requests.delete(f"{API_URL}/model", json={"model_name": model_to_delete})
+        response = requests.delete(
+            f"{API_URL}/model", json={"model_name": model_to_delete}
+        )
         if response.status_code == 200:
             st.success("Модель успешно удалена!")
         else:

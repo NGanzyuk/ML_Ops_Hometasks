@@ -1,7 +1,6 @@
 import pandas as pd
 from flask import Response, request
 from flask_restx import Api, Resource, fields
-
 from service import Service
 
 api = Api(version="0.1.0", title="Model API", description="API для ML моделей")
@@ -9,41 +8,101 @@ api = Api(version="0.1.0", title="Model API", description="API для ML мод�
 service = Service()
 
 # Определение моделей для API
-typesOutput = api.model("Types output",
-                        {"types": fields.List(description="Доступные типы моделей", cls_or_instance=fields.String)})
-infoModel = api.model("Model info",
-                      {"id": fields.String(), "type": fields.String(), "params": fields.Wildcard(fields.String)})
-instancesOutput = api.model("Instances output", {
-    "instances": fields.List(description="Доступные экземпляры моделей", cls_or_instance=fields.Nested(infoModel))})
-predictionOutput = api.model("Prediction output",
-                             {"predict": fields.List(description="Список предсказаний", cls_or_instance=fields.Float)})
-modelNameOutput = api.model("Model name output",
-                            {"model_name": fields.String(description="Уникальный идентификатор модели")})
-errorOutput = api.model("Error output", {"message": fields.String(description="Сообщение об ошибке")})
+typesOutput = api.model(
+    "Types output",
+    {
+        "types": fields.List(
+            description="Доступные типы моделей", cls_or_instance=fields.String
+        )
+    },
+)
+infoModel = api.model(
+    "Model info",
+    {
+        "id": fields.String(),
+        "type": fields.String(),
+        "params": fields.Wildcard(fields.String),
+    },
+)
+instancesOutput = api.model(
+    "Instances output",
+    {
+        "instances": fields.List(
+            description="Доступные экземпляры моделей",
+            cls_or_instance=fields.Nested(infoModel),
+        )
+    },
+)
+predictionOutput = api.model(
+    "Prediction output",
+    {
+        "predict": fields.List(
+            description="Список предсказаний", cls_or_instance=fields.Float
+        )
+    },
+)
+modelNameOutput = api.model(
+    "Model name output",
+    {"model_name": fields.String(description="Уникальный идентификатор модели")},
+)
+errorOutput = api.model(
+    "Error output", {"message": fields.String(description="Сообщение об ошибке")}
+)
 
-modelRetrainInput = api.model("Model retrain input", {
-    "data": fields.List(description="DataFrame с признаками в формате JSON",
-                        cls_or_instance=fields.Wildcard(fields.String)),
-    "target": fields.List(description="Целевая переменная", cls_or_instance=fields.Float),
-    "model_name": fields.String(description="Уникальный идентификатор модели для переобучения"),
-})
+modelRetrainInput = api.model(
+    "Model retrain input",
+    {
+        "data": fields.List(
+            description="DataFrame с признаками в формате JSON",
+            cls_or_instance=fields.Wildcard(fields.String),
+        ),
+        "target": fields.List(
+            description="Целевая переменная", cls_or_instance=fields.Float
+        ),
+        "model_name": fields.String(
+            description="Уникальный идентификатор модели для переобучения"
+        ),
+    },
+)
 
-modelFitInput = api.model("Model fit input", {
-    "data": fields.List(description="DataFrame с признаками в формате JSON",
-                        cls_or_instance=fields.Wildcard(fields.String)),
-    "target": fields.List(description="Целевая переменная", cls_or_instance=fields.Float),
-    "model_type": fields.String(description="Тип модели для обучения"),
-    "params": fields.Wildcard(description="Параметры для обучения модели", cls_or_instance=fields.String),
-})
+modelFitInput = api.model(
+    "Model fit input",
+    {
+        "data": fields.List(
+            description="DataFrame с признаками в формате JSON",
+            cls_or_instance=fields.Wildcard(fields.String),
+        ),
+        "target": fields.List(
+            description="Целевая переменная", cls_or_instance=fields.Float
+        ),
+        "model_type": fields.String(description="Тип модели для обучения"),
+        "params": fields.Wildcard(
+            description="Параметры для обучения модели", cls_or_instance=fields.String
+        ),
+    },
+)
 
-modelPredictInput = api.model("Model predict input", {
-    "data": fields.List(description="DataFrame с признаками в формате JSON",
-                        cls_or_instance=fields.Wildcard(fields.String)),
-    "model_name": fields.String(description="Уникальный идентификатор модели для получения предсказания"),
-})
+modelPredictInput = api.model(
+    "Model predict input",
+    {
+        "data": fields.List(
+            description="DataFrame с признаками в формате JSON",
+            cls_or_instance=fields.Wildcard(fields.String),
+        ),
+        "model_name": fields.String(
+            description="Уникальный идентификатор модели для получения предсказания"
+        ),
+    },
+)
 
-modelDeleteInput = api.model("Model delete input",
-                             {"model_name": fields.String(description="Уникальный идентификатор модели для удаления")})
+modelDeleteInput = api.model(
+    "Model delete input",
+    {
+        "model_name": fields.String(
+            description="Уникальный идентификатор модели для удаления"
+        )
+    },
+)
 
 
 # Определение маршрутов API

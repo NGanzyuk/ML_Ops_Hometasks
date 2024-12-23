@@ -7,9 +7,9 @@ from .xgboost_classifier import XGBoostClassifierModel
 
 # Словарь для сопоставления типов моделей с их классами
 modelTypes = {
-    'catboost_classifier': CatBoostClassifierModel,
-    'logistic_regression': LogisticRegressionModel,
-    'xgboost_classifier': XGBoostClassifierModel
+    "catboost_classifier": CatBoostClassifierModel,
+    "logistic_regression": LogisticRegressionModel,
+    "xgboost_classifier": XGBoostClassifierModel,
 }
 
 

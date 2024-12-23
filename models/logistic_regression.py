@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-import tempfile
-import pandas as pd
 import pickle
+import tempfile
+
+import pandas as pd
 from sklearn.linear_model import LogisticRegression
+
 from .base_model import BaseModel
+
 
 class LogisticRegressionModel(BaseModel):
 
@@ -23,7 +26,9 @@ class LogisticRegressionModel(BaseModel):
 
     @staticmethod
     def loads(blob: bytes):
-        raise NotImplementedError("Logistic Regression model does not support loading from bytes.")
+        raise NotImplementedError(
+            "Logistic Regression model does not support loading from bytes."
+        )
 
     @staticmethod
     def _saveModel(model) -> bytes:

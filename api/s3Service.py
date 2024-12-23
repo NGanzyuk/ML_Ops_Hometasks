@@ -1,21 +1,21 @@
 import os
 
 import boto3
-from botocore.exceptions import NoCredentialsError, ClientError
+from botocore.exceptions import ClientError, NoCredentialsError
 
 
 class S3Service:
     def __init__(self):
-        self.endpoint_url = os.getenv('S3_ENDPOINT_URL')
-        self.access_key = os.getenv('S3_ACCESS_KEY')
-        self.secret_key = os.getenv('S3_SECRET_KEY')
-        self.bucket_name = os.getenv('S3_BUCKET_NAME')
+        self.endpoint_url = os.getenv("S3_ENDPOINT_URL")
+        self.access_key = os.getenv("S3_ACCESS_KEY")
+        self.secret_key = os.getenv("S3_SECRET_KEY")
+        self.bucket_name = os.getenv("S3_BUCKET_NAME")
 
         self.s3 = boto3.client(
-            's3',
+            "s3",
             endpoint_url=self.endpoint_url,
             aws_access_key_id=self.access_key,
-            aws_secret_access_key=self.secret_key
+            aws_secret_access_key=self.secret_key,
         )
 
         self.create_bucket_if_not_exists()
@@ -52,7 +52,7 @@ class S3Service:
         """Список файлов в бакете."""
         try:
             response = self.s3.list_objects_v2(Bucket=self.bucket_name)
-            files = [obj['Key'] for obj in response.get('Contents', [])]
+            files = [obj["Key"] for obj in response.get("Contents", [])]
             return files
         except ClientError as e:
             print(f"Ошибка при получении списка файлов: {e}")
