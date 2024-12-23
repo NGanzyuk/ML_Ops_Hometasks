@@ -24,7 +24,8 @@ class DataBase:
         """Закрытие подключения к базе данных."""
         self.conn.close()
 
-    def create_model(self, id_: str, type_: str, params: dict, binary: bytes) -> bool:
+    def create_model(self, id_: str, type_: str, params: dict,
+                     binary: bytes) -> bool:
         """Создание новой модели в базе данных.
 
         Args:

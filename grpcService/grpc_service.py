@@ -27,7 +27,8 @@ class ModelService(model_service_pb2_grpc.ModelServiceServicer):
 
         model_class = modelTypes.get(request.model_type)
         if model_class is None:
-            context.set_details(f"Модель типа '{request.model_type}' не найдена.")
+            context.set_details(
+                f"Модель типа '{request.model_type}' не найдена.")
             context.set_code(grpc.StatusCode.NOT_FOUND)
             return model_service_pb2.TrainResponse(status="failed")
 
@@ -72,7 +73,8 @@ class ModelService(model_service_pb2_grpc.ModelServiceServicer):
 def serve():
     """Запуск gRPC сервера."""
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    model_service_pb2_grpc.add_ModelServiceServicer_to_server(ModelService(), server)
+    model_service_pb2_grpc.add_ModelServiceServicer_to_server(
+        ModelService(), server)
     server.add_insecure_port("[::]:50051")
     server.start()
     logging.info("gRPC сервер запущен на порту 50051.")

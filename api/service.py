@@ -31,7 +31,8 @@ class Service:
         """Получить информацию о всех обученных моделях."""
         return self.db.get_models()
 
-    def modelRetrain(self, data: pd.DataFrame, target: list, modelName: str) -> str:
+    def modelRetrain(self, data: pd.DataFrame, target: list,
+                     modelName: str) -> str:
         """Переобучить модель на новых данных с использованием старых параметров."""
         modelDict = self.db.get_model(modelName)
         if modelDict is None:
@@ -48,7 +49,8 @@ class Service:
         clf = clfClass(params)
         clf.fit(data, target)
 
-        if not self.db.create_model(newModelName, modelType, params, clf.dumps()):
+        if not self.db.create_model(
+                newModelName, modelType, params, clf.dumps()):
             raise Exception("Ошибка при создании модели в базе данных.")
 
         return newModelName
@@ -75,7 +77,9 @@ class Service:
 
             mlflow.log_param("model_type", modelType)
             mlflow.log_params(params)
-            mlflow.log_metric("accuracy", self.evaluate_model(clf, data, target))
+            mlflow.log_metric(
+                "accuracy", self.evaluate_model(
+                    clf, data, target))
             mlflow.sklearn.log_model(clf, modelName)
 
         if not self.db.create_model(modelName, modelType, params, clf.dumps()):
@@ -95,7 +99,8 @@ class Service:
 
         clf = loadModel(modelDict["type"], modelDict["binary"])
         if clf is None:
-            raise ValueError(f"Не удалось загрузить модель типа '{modelDict['type']}'.")
+            raise ValueError(
+                f"Не удалось загрузить модель типа '{modelDict['type']}'.")
 
         predictions = clf.predict(data)
         return list(predictions)

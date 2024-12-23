@@ -12,7 +12,8 @@ class CatBoostClassifierModel(BaseModel):
 
     def __init__(self, params: dict | None = None, obj=None):
         super().__init__()
-        self.clf = catboost.CatBoostClassifier(**params) if obj is None else obj
+        self.clf = catboost.CatBoostClassifier(
+            **params) if obj is None else obj
 
     def fit(self, x: pd.DataFrame, y: list) -> None:
         """Обучить модель классификатора CatBoost."""

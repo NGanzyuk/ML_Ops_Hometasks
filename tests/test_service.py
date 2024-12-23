@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 from api.service import Service
 
+
 class TestService(unittest.TestCase):
     """Класс для тестирования сервиса, взаимодействующего с S3 и базой данных."""
 
@@ -26,7 +27,8 @@ class TestService(unittest.TestCase):
         self.service.upload_model_to_s3(model_name, model_binary)
 
         expected_file_name = f"{model_name}.model"
-        self.mock_s3_service.upload_file.assert_called_once_with(expected_file_name)
+        self.mock_s3_service.upload_file.assert_called_once_with(
+            expected_file_name)
 
     @patch("builtins.open", new_callable=unittest.mock.mock_open)
     def test_download_model_from_s3(self, mock_open):
@@ -45,6 +47,7 @@ class TestService(unittest.TestCase):
         )
 
         self.assertEqual(result, mock_binary_data)
+
 
 if __name__ == '__main__':
     unittest.main()

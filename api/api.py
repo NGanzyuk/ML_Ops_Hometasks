@@ -43,10 +43,13 @@ predictionOutput = api.model(
 )
 modelNameOutput = api.model(
     "Model name output",
-    {"model_name": fields.String(description="Уникальный идентификатор модели")},
+    {"model_name": fields.String(
+        description="Уникальный идентификатор модели")},
 )
 errorOutput = api.model(
-    "Error output", {"message": fields.String(description="Сообщение об ошибке")}
+    "Error output", {
+        "message": fields.String(
+            description="Сообщение об ошибке")}
 )
 
 modelRetrainInput = api.model(

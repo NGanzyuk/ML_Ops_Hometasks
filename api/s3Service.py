@@ -33,7 +33,8 @@ class S3Service:
             object_name = file_name
         try:
             self.s3.upload_file(file_name, self.bucket_name, object_name)
-            print(f"Файл {file_name} загружен как {object_name} в {self.bucket_name}.")
+            print(
+                f"Файл {file_name} загружен как {object_name} в {self.bucket_name}.")
         except FileNotFoundError:
             print(f"Файл {file_name} не найден.")
         except NoCredentialsError:
