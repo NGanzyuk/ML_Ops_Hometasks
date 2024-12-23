@@ -9,13 +9,7 @@ class TestService(unittest.TestCase):
     @patch('api.service.DataBase')
     def setUp(self, mock_db, mock_s3_service):
         self.mock_s3_service = mock_s3_service.return_value
-        self.service = Service(
-            s3_endpoint='http://mock-s3-endpoint',
-            s3_access_key='mock_access_key',
-            s3_secret_key='mock_secret_key',
-            s3_bucket='mock_bucket',
-            databaseDsn='mock_dsn'
-        )
+        self.service = Service()
         self.service.s3_service = self.mock_s3_service
 
     def test_upload_model_to_s3(self):
