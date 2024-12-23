@@ -1,3 +1,4 @@
+import subprocess
 import uuid
 
 import mlflow
@@ -10,15 +11,16 @@ from models.model_factory import modelTypes, getModelType, loadModel
 
 
 class Service:
-    def __init__(self, databaseDsn=None, s3_endpoint=None, s3_access_key=None, s3_secret_key=None, s3_bucket=None):
+    def __init__(self, databaseDsn=None):
         if databaseDsn is None:
             databaseDsn = "host='mydb' dbname='mydb' user='mydb' password='mydb'"
         self.db = DataBase(databaseDsn)
-        self.s3_service = S3Service(s3_endpoint, s3_access_key, s3_secret_key, s3_bucket)
+        self.s3_service = S3Service()
 
     def load_dataset(self, dataset_name: str) -> pd.DataFrame:
         subprocess.run(["dvc", "pull", dataset_name], check=True)
         return pd.read_csv(dataset_name)
+
     @staticmethod
     def getModelList() -> list:
         """Получить список всех возможных типов моделей."""

@@ -4,10 +4,10 @@ import logging
 
 API_URL = "http://localhost:8000"
 
-# Настройка логирования
 logging.basicConfig(level=logging.INFO)
 
 st.title("ML Model Dashboard")
+
 
 def get_model_list():
     response = requests.get(f"{API_URL}/model_list")
@@ -18,6 +18,7 @@ def get_model_list():
         logging.error("Ошибка при получении списка моделей: %s", response.text)
         return []
 
+
 def train_model(model_type, params):
     response = requests.post(f"{API_URL}/model", json={"model_type": model_type, "params": params})
     if response.status_code == 200:
@@ -25,6 +26,7 @@ def train_model(model_type, params):
     else:
         st.error("Ошибка при обучении модели.")
         logging.error("Ошибка при обучении модели: %s", response.text)
+
 
 def get_prediction(model_name, input_data):
     response = requests.get(f"{API_URL}/model", params={"model_name": model_name, "input_data": input_data})
@@ -34,6 +36,7 @@ def get_prediction(model_name, input_data):
         st.error("Ошибка при получении предсказания.")
         logging.error("Ошибка при получении предсказания: %s", response.text)
         return None
+
 
 models = get_model_list()
 st.write("Доступные модели: ", models)

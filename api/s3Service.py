@@ -1,15 +1,22 @@
+import os
+
 import boto3
 from botocore.exceptions import NoCredentialsError, ClientError
 
+
 class S3Service:
-    def __init__(self, endpoint_url, access_key, secret_key, bucket_name):
+    def __init__(self):
+        self.endpoint_url = os.getenv('S3_ENDPOINT_URL')
+        self.access_key = os.getenv('S3_ACCESS_KEY')
+        self.secret_key = os.getenv('S3_SECRET_KEY')
+        self.bucket_name = os.getenv('S3_BUCKET_NAME')
+
         self.s3 = boto3.client(
             's3',
-            endpoint_url=endpoint_url,
-            aws_access_key_id=access_key,
-            aws_secret_access_key=secret_key
+            endpoint_url=self.endpoint_url,
+            aws_access_key_id=self.access_key,
+            aws_secret_access_key=self.secret_key
         )
-        self.bucket_name = bucket_name
 
         self.create_bucket_if_not_exists()
 

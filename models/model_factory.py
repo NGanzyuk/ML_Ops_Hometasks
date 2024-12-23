@@ -1,9 +1,9 @@
 import typing
 
-from base_model import BaseModel
-from catboost_classifier import CatBoostClassifierModel
-from logistic_regression import LogisticRegressionModel
-from xgboost_classifier import XGBoostClassifierModel
+from .base_model import BaseModel
+from .catboost_classifier import CatBoostClassifierModel
+from .logistic_regression import LogisticRegressionModel
+from .xgboost_classifier import XGBoostClassifierModel
 
 # Словарь для сопоставления типов моделей с их классами
 modelTypes = {

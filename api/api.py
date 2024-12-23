@@ -4,13 +4,9 @@ from flask_restx import Api, Resource, fields
 
 from service import Service
 
-api = Api(version="0.1.0", title="Model API", description="Простой пример API для ML моделей")
-S3_ENDPOINT = "http://localhost:9000"
-S3_ACCESS_KEY = "your_access_key"
-S3_SECRET_KEY = "your_secret_key"
-S3_BUCKET = "your_bucket_name"
-service = Service(s3_endpoint=S3_ENDPOINT, s3_access_key=S3_ACCESS_KEY, s3_secret_key=S3_SECRET_KEY,
-                  s3_bucket=S3_BUCKET)
+api = Api(version="0.1.0", title="Model API", description="API для ML моделей")
+
+service = Service()
 
 # Определение моделей для API
 typesOutput = api.model("Types output",
