@@ -1,5 +1,4 @@
 import os
-
 import boto3
 from botocore.exceptions import ClientError, NoCredentialsError
 
@@ -21,6 +20,7 @@ class S3Service:
         self.create_bucket_if_not_exists()
 
     def create_bucket_if_not_exists(self):
+        """Создание бакета, если он не существует."""
         try:
             self.s3.head_bucket(Bucket=self.bucket_name)
         except ClientError:

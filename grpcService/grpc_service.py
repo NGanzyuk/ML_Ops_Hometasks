@@ -70,6 +70,7 @@ class ModelService(model_service_pb2_grpc.ModelServiceServicer):
 
 
 def serve():
+    """Запуск gRPC сервера."""
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     model_service_pb2_grpc.add_ModelServiceServicer_to_server(ModelService(), server)
     server.add_insecure_port("[::]:50051")

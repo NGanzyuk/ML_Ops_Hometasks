@@ -18,6 +18,7 @@ class Service:
         self.s3_service = S3Service()
 
     def load_dataset(self, dataset_name: str) -> pd.DataFrame:
+        """Загрузить набор данных с использованием DVC."""
         subprocess.run(["dvc", "pull", dataset_name], check=True)
         return pd.read_csv(dataset_name)
 
@@ -58,10 +59,12 @@ class Service:
         """Обучить модель с заданными параметрами и данными."""
         modelName = str(uuid.uuid4())
         clfClass = getModelType(modelType)
+
         if data is None:
             dataset = self.load_dataset("data/train.csv")
             target = dataset["target"]
-            data = dataset.drop("target")
+            data = dataset.drop("target", axis=1)
+
         if clfClass is None:
             raise ValueError(f"Тип модели '{modelType}' не найден.")
 
@@ -80,7 +83,8 @@ class Service:
 
         return modelName
 
-    def evaluate_model(self, model, data, target):
+    def evaluate_model(self, model, data, target) -> float:
+        """Оценить модель с использованием accuracy."""
         return accuracy_score(target, model.predict(data))
 
     def getModel(self, data: pd.DataFrame, modelName: str) -> list:
@@ -110,7 +114,7 @@ class Service:
             f.write(model_binary)
         self.s3_service.upload_file(file_name)
 
-    def download_model_from_s3(self, model_name: str):
+    def download_model_from_s3(self, model_name: str) -> bytes:
         """Скачивание модели из S3."""
         file_name = f"{model_name}.model"
         self.s3_service.download_file(file_name, file_name)

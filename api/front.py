@@ -1,5 +1,4 @@
 import logging
-
 import requests
 import streamlit as st
 
@@ -62,7 +61,7 @@ with st.form("predict_model"):
     predict_button = st.form_submit_button("Получить предсказание")
     if predict_button:
         prediction = get_prediction(model_name, input_data)
-        if prediction:
+        if prediction is not None:
             st.write("Предсказание: ", prediction)
 
 with st.form("delete_model"):
