@@ -33,7 +33,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t nganzyukedu/ML_Ops:latest  . 
+          docker build -t nganzyukedu/ml_ops:latest  . 
 
       - name: Log in to Docker Hub
         env:
@@ -43,4 +43,4 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push nganzyukedu/ML_Ops:latest
+          docker push nganzyukedu/ml_ops:latest
