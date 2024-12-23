@@ -19,3 +19,4 @@ boto3
 moto
 pytest
 python-dotenv
+pylint
